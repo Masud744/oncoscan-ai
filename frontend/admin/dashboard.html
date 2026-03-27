@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - OncoScan AI</title>
+    <link rel="stylesheet" href="/frontend/admin/admin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+        <h1>Admin Dashboard</h1>
+        <div style="display: flex; gap: 10px;">
+            <button id="refreshBtn" onclick="refreshAdmin()">🔄 Refresh</button>
+            <button onclick="location.href='/admin/stats'">View Detailed Stats</button>
+            <button class="delete-btn" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <div class="stats">
+        <div class="card">
+            <h3>Total Predictions</h3>
+            <p id="totalPredictions">0</p>
+        </div>
+
+        <div class="card">
+            <h3>Tumor Cases</h3>
+            <p id="tumorCases" style="color: var(--danger);">0</p>
+        </div>
+
+        <div class="card">
+            <h3>No Tumor Cases</h3>
+            <p id="noTumorCases" style="color: var(--success);">0</p>
+        </div>
+
+        <div class="card">
+            <h3>Total Patients</h3>
+            <p id="totalPatients">0</p>
+        </div>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 20px; gap: 15px;">
+        <h2>Recent Predictions</h2>
+        <input type="text" id="searchInput" placeholder="Search by Patient Name, ID, or Result..." oninput="filterTable()" style="margin-bottom: 0;">
+    </div>
+
+    <div class="table-container">
+        <table id="predictionTable">
+            <thead>
+                <tr>
+                    <th>Patient Name</th>
+                    <th>Patient ID</th>
+                    <th>Scan Image</th>
+                    <th>Prediction</th>
+                    <th>Confidence</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be loaded here -->
+            </tbody>
+        </table>
+    </div>
+
+    <footer class="footer" style="text-align: center; padding: 40px 0; color: var(--text-secondary); font-size: 0.875rem;">
+        <p>&copy; 2026 OncoScan AI. All rights reserved.</p>
+        <p style="margin-top: 10px;">Developed by <a href="https://github.com/Masud744" target="_blank" style="color: #3b82f6; text-decoration: none; font-weight: 600; border-bottom: 2px solid transparent; transition: border-color 0.2s;" onmouseover="this.style.borderColor='#3b82f6'" onmouseout="this.style.borderColor='transparent'">Shahriar Alom Masud</a></p>
+    </footer>
+</div>
+<script src="/frontend/config.js"></script>
+<script src="/frontend/admin/dashboard.js"></script>
+<script>
+    function logout() {
+        localStorage.removeItem("user_id");
+        localStorage.removeItem("role");
+        window.location.href = "/login";
+    }
+</script>
+</body>
+</html>

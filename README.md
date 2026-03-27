@@ -185,7 +185,6 @@ pip install -r requirements.txt
 
 ```
 uvicorn backend.main:app --reload
-
 ```
 
 ### 5. Open in Browser
