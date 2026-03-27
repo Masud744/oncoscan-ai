@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OncoScan AI - Tumor Detection</title>
+    <link rel="stylesheet" href="/frontend/user/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <header class="header">
+        <h1 class="title">OncoScan AI</h1>
+        <p class="subtitle">Advanced Medical Image Analysis & Tumor Detection</p>
+    </header>
+
+    <div class="main-content">
+        <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                <h2 style="margin: 0;">New Analysis</h2>
+                <button class="secondary-btn" onclick="logout()">Logout</button>
+            </div>
+
+            <div class="input-group">
+                <div class="input-field">
+                    <label for="patientName">Patient Name</label>
+                    <input type="text" id="patientName" placeholder="Enter full name">
+                </div>
+                <div class="input-field">
+                    <label for="patientId">Patient ID</label>
+                    <input type="text" id="patientId" placeholder="Enter ID number">
+                </div>
+            </div>
+
+            <div id="dropArea" class="drop-area">
+                <div class="upload-icon">📁</div>
+                <p>Drag & Drop Medical Image Here</p>
+                <span>or</span>
+                <label for="imageInput" class="upload-button" style="margin-top: 15px; display: inline-block;">Browse Files</label>
+                <input type="file" id="imageInput" accept="image/*" style="display: none;">
+            </div>
+            
+            <p id="fileName" style="margin-top: 10px; color: var(--success-color); font-weight: 600;"></p>
+
+            <div id="previewSection" style="display:none; margin-top: 30px; border-top: 1px solid #e2e8f0; padding-top: 30px;">
+                <h3>Image Preview</h3>
+                <img id="previewImage" class="preview-img" alt="Preview">
+                <div style="margin-top: 20px;">
+                    <button id="predictButton" class="primary-btn">Analyze Image</button>
+                </div>
+                <div id="loadingIndicator" class="loading" style="display:none;">
+                    <div class="spinner"></div>
+                    <p>Processing Scan...</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 30px; border-top: 1px solid #e2e8f0; padding-top: 20px;">
+                <button class="secondary-btn" style="width: 100%;" onclick="location.href='/history-page'">View Prediction History</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2026 OncoScan AI. All rights reserved.</p>
+        <p style="margin-top: 10px;">Developed by <a href="https://github.com/Masud744" target="_blank" style="color: #3b82f6; text-decoration: none; font-weight: 600; border-bottom: 2px solid transparent; transition: border-color 0.2s;" onmouseover="this.style.borderColor='#3b82f6'" onmouseout="this.style.borderColor='transparent'">Shahriar Alom Masud</a></p>
+    </footer>
+</div>
+
+<script src="/frontend/config.js"></script>
+<script src="/frontend/user/script.js"></script>
+<script>
+    function logout() {
+        localStorage.removeItem("user_id");
+        localStorage.removeItem("role");
+        window.location.href = "/login";
+    }
+</script>
