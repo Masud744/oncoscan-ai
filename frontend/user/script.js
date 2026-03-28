@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
             localStorage.setItem("lastPatientName", patientName);
 
             // Redirect to result page
-            window.location.href = "/result-page";
+           window.location.href = "/user/result.html";
 
         } catch (error) {
             console.error("Prediction error:", error);
