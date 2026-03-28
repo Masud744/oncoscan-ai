@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // -------- LOGIN CHECK --------
     const user_id = localStorage.getItem("user_id");
     if (!user_id) {
-        window.location.href = "/user/result.html";
+       window.location.href = "/user/login.html";
         return;
     }
 
