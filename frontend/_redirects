@@ -1,1 +1,7 @@
-/* /user/login.html 200
+/login /user/login.html 200
+/ /user/login.html 200
+/index /user/index.html 200
+/history /user/history.html 200
+/result /user/result.html 200
+/admin /admin/dashboard.html 200
+/stats /admin/stats.html 200
