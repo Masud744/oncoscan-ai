@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction History - OncoScan AI</title>
+    <link rel="stylesheet" href="/user/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <header class="header">
+        <h1 class="title">Prediction History</h1>
+        <p class="subtitle">Review your past medical analysis records</p>
+    </header>
+
+    <div class="main-content">
+        <div class="card" style="padding: 20px;">
+            <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 20px; align-items: center; justify-content: space-between;">
+                <div style="display: flex; gap: 10px; flex: 1; min-width: 300px;">
+                    <input type="text" id="searchInput" placeholder="Search Patient Name or ID..." oninput="filterHistory()" style="flex: 1;">
+                    <select id="filterPrediction" onchange="filterHistory()" style="width: 180px;">
+                        <option value="all">All Predictions</option>
+                        <option value="Tumor">Tumor Detected</option>
+                        <option value="No Tumor">No Tumor Detected</option>
+                    </select>
+                </div>
+                
+                <div style="display: flex; gap: 10px;">
+                    <button class="primary-btn" onclick="refreshHistory()" style="padding: 10px 20px;">🔄 Refresh</button>
+                    <button class="secondary-btn" onclick="location.href='/'" style="padding: 10px 20px;">New Analysis</button>
+                </div>
+            </div>
+
+            <div class="table-container" style="margin-top: 20px; overflow-x: auto;">
+                <table id="historyTable">
+                    <thead>
+                        <tr>
+                            <th>Patient Name</th>
+                            <th>Patient ID</th>
+                            <th>Scan Image</th>
+                            <th>Prediction</th>
+                            <th>Confidence</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- History items will be injected here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2026 OncoScan AI. All rights reserved.</p>
+        <p style="margin-top: 10px;">Developed by <a href="https://github.com/Masud744" target="_blank" style="color: #3b82f6; text-decoration: none; font-weight: 600; border-bottom: 2px solid transparent; transition: border-color 0.2s;" onmouseover="this.style.borderColor='#3b82f6'" onmouseout="this.style.borderColor='transparent'">Shahriar Alom Masud</a></p>
+    </footer>
+</div>
+
+<!-- Image Preview Modal -->
+<div id="imageModal" class="modal" onclick="closeModal()">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImage">
+</div>
+
+<script src="/config.js"></script>
+<script src="/user/history.js"></script>
+<script>
+    function closeModal() {
+        document.getElementById("imageModal").style.display = "none";
+    }
+</script>
+</body>
+</html>

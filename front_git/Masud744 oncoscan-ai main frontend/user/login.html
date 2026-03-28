@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - OncoScan AI</title>
+    <link rel="stylesheet" href="/user/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="container" style="justify-content: center;">
+    <div class="header" style="margin-top: 0;">
+        <h1 class="title">OncoScan AI</h1>
+        <p class="subtitle">Secure Medical Portal</p>
+    </div>
+
+    <div class="card" style="max-width: 400px; margin: 0 auto; width: 100%;">
+        <div id="loginForm">
+            <h2 style="margin-bottom: 20px; text-align: center;">Welcome Back</h2>
+            <div class="input-field">
+                <label>Username</label>
+                <input type="text" id="username" placeholder="Enter your username">
+            </div>
+            <div class="input-field">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="Enter your password">
+            </div>
+            <button class="primary-btn" style="width: 100%; margin-top: 10px;" onclick="login()">Login</button>
+            <p style="text-align: center; margin-top: 20px; color: #64748b;">
+                Don't have an account? <a href="#" onclick="toggleAuth()" style="color: #3b82f6; font-weight: 600; text-decoration: none;">Sign Up</a>
+            </p>
+        </div>
+
+        <div id="signupForm" style="display: none;">
+            <h2 style="margin-bottom: 20px; text-align: center;">Create Account</h2>
+            <div class="input-field">
+                <label>Username</label>
+                <input type="text" id="regUser" placeholder="Choose a username">
+            </div>
+            <div class="input-field">
+                <label>Password</label>
+                <input type="password" id="regPass" placeholder="Choose a password">
+            </div>
+            <button class="primary-btn" style="width: 100%; margin-top: 10px;" onclick="register()">Sign Up</button>
+            <p style="text-align: center; margin-top: 20px; color: #64748b;">
+                Already have an account? <a href="#" onclick="toggleAuth()" style="color: #3b82f6; font-weight: 600; text-decoration: none;">Login</a>
+            </p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2026 OncoScan AI. All rights reserved.</p>
+        <p style="margin-top: 10px;">Developed by <a href="https://github.com/Masud744" target="_blank" style="color: #3b82f6; text-decoration: none; font-weight: 600; border-bottom: 2px solid transparent; transition: border-color 0.2s;" onmouseover="this.style.borderColor='#3b82f6'" onmouseout="this.style.borderColor='transparent'">Shahriar Alom Masud</a></p>
+    </footer>
+</div>
+<script src="/config.js"></script>
+<script src="/user/login.js"></script>
+<script>
+    function toggleAuth() {
+        const login = document.getElementById("loginForm");
+        const signup = document.getElementById("signupForm");
+        if (login.style.display === "none") {
+            login.style.display = "block";
+            signup.style.display = "none";
+        } else {
+            login.style.display = "none";
+            signup.style.display = "block";
+        }
+    }
+</script>
+</body>
+</html>
