@@ -24,8 +24,8 @@ ROOT_DIR = os.path.abspath(os.path.join(BASE_DIR, ".."))
 DATABASE = os.path.join(ROOT_DIR, "database.db")
 STATIC_DIR = os.path.join(ROOT_DIR, "static")
 FRONTEND_DIR = os.path.join(ROOT_DIR, "frontend")
-MODEL_PATH = os.path.join(ROOT_DIR, "models", "model_fixed.keras")
-
+MODEL_PATH = os.path.join(ROOT_DIR, "models", "model_fixed")
+model = tf.keras.models.load_model(MODEL_PATH)
 os.makedirs(STATIC_DIR, exist_ok=True)
 
 def get_db():
