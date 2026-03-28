@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Check admin role
     const role = localStorage.getItem("role");
     if (role !== "admin") {
-        window.location.href = "/login";
+        window.location.href = "/user/login.html";
         return;
     }
 
