@@ -1,512 +1,316 @@
-<<<<<<< HEAD
-# OncoScan AI – Brain Tumor Detection Web Application
+# OncoScan AI: Full Stack Explainable Brain Tumor Detection System Using CNN and Grad-CAM
+![Python](https://img.shields.io/badge/Python-3.x-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-Backend-green)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-DeepLearning-orange)
+![CNN](https://img.shields.io/badge/CNN-Image_Classification-red)
+![Grad-CAM](https://img.shields.io/badge/Grad--CAM-Explainable_AI-purple)
+![SQLite](https://img.shields.io/badge/SQLite-Database-lightgrey)
+![HTML](https://img.shields.io/badge/HTML-Frontend-orange)
+![CSS](https://img.shields.io/badge/CSS-Frontend-blue)
+![JavaScript](https://img.shields.io/badge/JavaScript-Frontend-yellow)
+![Chart.js](https://img.shields.io/badge/Chart.js-Analytics-pink)
+![Netlify](https://img.shields.io/badge/Netlify-Frontend_Hosting-teal)
+![Render](https://img.shields.io/badge/Render-Backend_Hosting-black)
+![REST API](https://img.shields.io/badge/REST-API-green)
+![ReportLab](https://img.shields.io/badge/PDF-Report_Generation-red)
+## Project Overview
+OncoScan AI is a full-stack explainable artificial intelligence system developed for detecting brain tumors from MRI images using a Convolutional Neural Network (CNN). The system integrates Grad-CAM for heatmap-based explainable AI visualization, a FastAPI backend for prediction and data management, and a web-based frontend interface for user interaction. The platform also includes PDF medical report generation, prediction history tracking, and an admin analytics dashboard. The frontend is deployed on Netlify and the backend is deployed on Render.
 
-## Project Description
-
-OncoScan AI is an AI-powered web application designed to detect brain tumors from MRI images using a trained deep learning model. The system allows users to upload MRI images, receive tumor predictions, download PDF medical reports, and view their prediction history. An admin panel is also included for monitoring system statistics and managing prediction records.
-
-This project integrates Artificial Intelligence, Web Development, Database Management, and Authentication into a complete full-stack AI application.
-
+This project integrates Machine Learning, Backend Development, Frontend Development, Database Management, REST API Development, and Cloud Deployment into a complete AI-based web platform.
 ---
+## Project Motivation
+Brain tumor diagnosis using MRI images is a complex and time-consuming process that requires expert radiologists. The goal of this project is to assist medical professionals by developing an AI system that can automatically analyze MRI images and predict whether a tumor is present or not.
 
-## System Features
-
-### User Features
-
-- User Registration
-- User Login
-- Upload MRI Image
-- Brain Tumor Prediction
-- Confidence Percentage Display
-- Download PDF Medical Report
-- User Prediction History
-- Image Preview
-- Drag and Drop Image Upload
-
-### Admin Features
-
-- Admin Dashboard
-- Total Predictions Statistics
-- Tumor Case Count
-- No Tumor Case Count
-- Total Patient Count
-- View All Predictions
-- Delete Prediction Records
-- System Statistics
-
-### AI Features
-
-- Brain MRI Image Classification
-- Tumor / No Tumor Prediction
-- Confidence Score Calculation
-- Image Preprocessing using OpenCV
-- Deep Learning Model Integration
-
+The system also provides explainable AI visualization (Grad-CAM heatmap) to show which region of the MRI image influenced the model’s decision.
 ---
-
-## Technology Stack
-
-| Technology         | Purpose               |
-| ------------------ | --------------------- |
-| Python             | Backend Development   |
-| FastAPI            | Web Framework         |
-| TensorFlow / Keras | AI Model              |
-| OpenCV             | Image Processing      |
-| SQLite             | Database              |
-| HTML               | Frontend Structure    |
-| CSS                | Frontend Styling      |
-| JavaScript         | Frontend Logic        |
-| ReportLab          | PDF Report Generation |
-| Uvicorn            | ASGI Server           |
-
----
-
-## System Architecture
+## Project Structure
 
 ```
-Client (Browser)
-        |
-        v
-Frontend (HTML, CSS, JavaScript)
-        |
-        v
-FastAPI Backend
-        |
-        |---- Authentication (Login / Register)
-        |---- Prediction API
-        |---- History API
-        |---- Admin API
-        |---- PDF Report Generator
-        |
-        v
-Database (SQLite)
-        |
-        v
-AI Model (TensorFlow)
-```
-
----
-
-## Database Structure
-
-### Users Table
-
-| Field      | Type      |
-| ---------- | --------- |
-| id         | INTEGER   |
-| username   | TEXT      |
-| password   | TEXT      |
-| role       | TEXT      |
-| created_at | TIMESTAMP |
-
-### Predictions Table
-
-| Field        | Type      |
-| ------------ | --------- |
-| id           | INTEGER   |
-| user_id      | INTEGER   |
-| patient_name | TEXT      |
-| patient_id   | TEXT      |
-| image_path   | TEXT      |
-| prediction   | TEXT      |
-| confidence   | REAL      |
-| date         | TIMESTAMP |
-
-Relationship:
-
-```
-One User → Many Predictions
-```
-
----
-
-## Project Folder Structure
-
-```
-ONCOSCAN-AI
+oncoscan-ai/
 │
-├── backend
-│       ├── main.py
-│       ├── database.py
+├── backend/                     # FastAPI backend + ML integration
+│   ├── main.py                  # Main FastAPI application
+│   ├── database.py              # Database connection & queries
+│   └── __pycache__/
 │
-├── frontend
-│       ├── admin
-│       │       ├── dashboard.html
-│       │       ├── dashboard.js
-│       │       ├── stats.html
-│       │       └── admin.css
-│       │
-│       └── user
-│               ├── login.html
-│               ├── index.html
-│               ├── result.html
-│               ├── history.html
-│               ├── script.js
-│               ├── history.js
-│               └── style.css
+├── frontend/                    # Frontend (Netlify hosted)
+│   ├── admin/
+│   │   ├── dashboard.html
+│   │   ├── dashboard.js
+│   │   ├── stats.html
+│   │   └── stats.js
+│   │
+│   ├── user/
+│   │   ├── history.html
+│   │   └── history.js
+│   │
+│   ├── index.html               # Upload page
+│   ├── login.html               # Login page
+│   ├── result.html              # Result page
+│   ├── script.js
+│   ├── style.css
+│   ├── config.js                # Backend API URL config
+│   └── _redirects               # Netlify redirects
 │
-├── models
-│       └── brain_tumor_model.h5
+├── models/                      # ML models
+│   ├── brain_tumor_model.h5
+│   ├── model_fixed.h5
+│   └── model_fixed.keras
 │
-├── static
-│       ├── images
-│       └── reports
+├── static/                      # Uploaded images, heatmaps, PDFs
 │
-├── database.db
-├── requirements.txt
+├── utils/                       # Helper functions
+│
+├── tests/                       # Testing files
+│
+├── notebooks/                   # Model training notebooks
+│
+├── results/                     # Prediction results
+│
+├── fix_model.py                 # Model conversion script
+├── database.db                  # SQLite database
+├── requirements.txt             # Python dependencies
+├── runtime.txt                  # Python runtime version
+├── Procfile                     # Render deployment config
 ├── .gitignore
 └── README.md
 ```
+## Machine Learning Model
+The brain tumor detection model is built using Deep Learning with Convolutional Neural Networks (CNN).
+
+### Model Details
+- Model Type: Convolutional Neural Network (CNN)
+- Task: Binary Image Classification
+- Classes: Tumor / No Tumor
+- Framework: TensorFlow / Keras
+- Image Processing: OpenCV
+- Output:
+  - Prediction (Tumor / No Tumor)
+  - Confidence Score
+
+### Model Workflow
+MRI Image
+↓
+Image Preprocessing
+↓
+CNN Model
+↓
+Prediction
+↓
+Tumor / No Tumor
+
 
 ---
+## Grad-CAM Heatmap (Explainable AI)
+Grad-CAM (Gradient-weighted Class Activation Mapping) is used to visualize which region of the MRI image influenced the model’s prediction.
 
-## How to Run the Project
+### Grad-CAM Workflow
 
-### 1. Clone Repository
+Input Image
+↓
+CNN Forward Pass
+↓
+Compute Gradients
+↓
+Generate Heatmap
+↓
+Overlay Heatmap on Image
 
-```
-git clone https://github.com/yourusername/oncoscan-ai.git
-cd oncoscan-ai
-```
 
-### 2. Create Virtual Environment
-
-```
-python -m venv venv
-venv\Scripts\activate
-```
-
-### 3. Install Requirements
-
-```
-pip install -r requirements.txt
-```
-
-### 4. Run Server
-
-```
-uvicorn backend.main:app --reload
-
-```
-
-### 5. Open in Browser
-
-```
-http://127.0.0.1:8000/login
-```
-
+This makes the AI system explainable and suitable for medical applications.
 ---
+## Backend (FastAPI)
+The backend of the system is developed using FastAPI.
 
-## Default Admin Login
-
-```
-Username: admin
-Password: admin123
-```
-
+### Backend Responsibilities
+- User Authentication
+- Image Upload Handling
+- AI Model Prediction
+- Heatmap Generation
+- PDF Report Generation
+- Database Storage
+- Prediction History
+- Admin Dashboard APIs
+- Statistics and Analytics
+- Record Deletion
 ---
+## REST API Endpoints
 
-## System Workflow
-
-```
-User Registration / Login
-            |
-            v
-Upload MRI Image
-            |
-            v
-AI Model Prediction
-            |
-            v
-Save Result to Database
-            |
-            v
-Generate PDF Report
-            |
-            v
-User History / Admin Dashboard
-```
-
+| Endpoint | Method | Description |
+|---------|--------|-------------|
+| /register | POST | User Registration |
+| /login | POST | User Login |
+| /predict | POST | Upload image and get prediction |
+| /history/{user_id} | GET | User prediction history |
+| /admin/all-history | GET | Admin dashboard data |
+| /stats | GET | System statistics |
+| /stats-details | GET | Chart data |
+| /delete/{id} | DELETE | Delete prediction |
+| /report/{id} | GET | Download PDF report |
 ---
-
-## Future Improvements
-
-- Password Hashing
-- Email Verification
-- Multiple Image Prediction
-- Export CSV Reports
-- Model Accuracy Dashboard
-- Cloud Deployment
-- Docker Support
-- API Authentication
-- Role-Based Access Security
-
----
-
-## Author
-
-Shahriar Alom Masud
-IoT & Robotics Engineering
-Web Application Developer | AI | IoT | Robotics
-
----
-
-## License
-
-This project is developed for educational and research purposes.
-=======
-# OncoScan AI – Brain Tumor Detection Web Application
-
-## Project Description
-
-OncoScan AI is an AI-powered web application designed to detect brain tumors from MRI images using a trained deep learning model. The system allows users to upload MRI images, receive tumor predictions, download PDF medical reports, and view their prediction history. An admin panel is also included for monitoring system statistics and managing prediction records.
-
-This project integrates Artificial Intelligence, Web Development, Database Management, and Authentication into a complete full-stack AI application.
-
----
-
-## System Features
-
-### User Features
-
-- User Registration
-- User Login
-- Upload MRI Image
-- Brain Tumor Prediction
-- Confidence Percentage Display
-- Download PDF Medical Report
-- User Prediction History
-- Image Preview
-- Drag and Drop Image Upload
-
-### Admin Features
-
-- Admin Dashboard
-- Total Predictions Statistics
-- Tumor Case Count
-- No Tumor Case Count
-- Total Patient Count
-- View All Predictions
-- Delete Prediction Records
-- System Statistics
-
-### AI Features
-
-- Brain MRI Image Classification
-- Tumor / No Tumor Prediction
-- Confidence Score Calculation
-- Image Preprocessing using OpenCV
-- Deep Learning Model Integration
-
----
-
-## Technology Stack
-
-| Technology         | Purpose               |
-| ------------------ | --------------------- |
-| Python             | Backend Development   |
-| FastAPI            | Web Framework         |
-| TensorFlow / Keras | AI Model              |
-| OpenCV             | Image Processing      |
-| SQLite             | Database              |
-| HTML               | Frontend Structure    |
-| CSS                | Frontend Styling      |
-| JavaScript         | Frontend Logic        |
-| ReportLab          | PDF Report Generation |
-| Uvicorn            | ASGI Server           |
-
----
-
-## System Architecture
-
-```
-Client (Browser)
-        |
-        v
-Frontend (HTML, CSS, JavaScript)
-        |
-        v
-FastAPI Backend
-        |
-        |---- Authentication (Login / Register)
-        |---- Prediction API
-        |---- History API
-        |---- Admin API
-        |---- PDF Report Generator
-        |
-        v
-Database (SQLite)
-        |
-        v
-AI Model (TensorFlow)
-```
-
----
-
-## Database Structure
+## Database (SQLite)
 
 ### Users Table
-
-| Field      | Type      |
-| ---------- | --------- |
-| id         | INTEGER   |
-| username   | TEXT      |
-| password   | TEXT      |
-| role       | TEXT      |
-| created_at | TIMESTAMP |
+| Field | Description |
+|------|-------------|
+| id | User ID |
+| username | Username |
+| password | Password |
+| role | user / admin |
+| created_at | Account creation date |
 
 ### Predictions Table
-
-| Field        | Type      |
-| ------------ | --------- |
-| id           | INTEGER   |
-| user_id      | INTEGER   |
-| patient_name | TEXT      |
-| patient_id   | TEXT      |
-| image_path   | TEXT      |
-| prediction   | TEXT      |
-| confidence   | REAL      |
-| date         | TIMESTAMP |
+| Field | Description |
+|------|-------------|
+| id | Prediction ID |
+| user_id | User ID |
+| patient_name | Patient Name |
+| patient_id | Patient ID |
+| image_path | Uploaded MRI image |
+| prediction | Tumor / No Tumor |
+| confidence | Confidence score |
+| heatmap_path | Heatmap image |
+| report_path | PDF report |
+| date | Prediction date |
 
 Relationship:
 
-```
 One User → Many Predictions
-```
+---
+## Frontend
+The frontend of the system is built using HTML, CSS, and JavaScript.
+
+### User Features
+- User Registration
+- User Login
+- Upload MRI Image
+- Drag and Drop Image Upload
+- Image Preview
+- Tumor Prediction Result
+- Confidence Score Display
+- Heatmap Visualization
+- PDF Report Download
+- Prediction History
+
+### Admin Features
+- Admin Dashboard
+- Total Predictions
+- Tumor Cases Count
+- No Tumor Cases Count
+- Total Patients
+- Recent Predictions Table
+- Delete Prediction Records
+- Analytics Charts
+---
+## Charts and Analytics
+Charts are implemented using Chart.js.
+
+Charts included:
+- Prediction Distribution (Pie Chart)
+- Daily Prediction Activity (Line Chart)
+---
+## System Architecture
+
+User (Browser)
+|
+v
+Frontend (HTML, CSS, JavaScript)
+|
+v
+Netlify (Frontend Hosting)
+|
+v
+FastAPI Backend (Render)
+|
+v
+AI Model (TensorFlow)
+|
+v
+Database (SQLite)
 
 ---
+## Deployment
 
-## Project Folder Structure
-
-```
-ONCOSCAN-AI
-│
-├── backend
-│       ├── main.py
-│       ├── database.py
-│
-├── frontend
-│       ├── admin
-│       │       ├── dashboard.html
-│       │       ├── dashboard.js
-│       │       ├── stats.html
-│       │       └── admin.css
-│       │
-│       └── user
-│               ├── login.html
-│               ├── index.html
-│               ├── result.html
-│               ├── history.html
-│               ├── script.js
-│               ├── history.js
-│               └── style.css
-│
-├── models
-│       └── brain_tumor_model.h5
-│
-├── static
-│       ├── images
-│       └── reports
-│
-├── database.db
-├── requirements.txt
-├── .gitignore
-└── README.md
-```
-
+| Component | Platform |
+|-----------|----------|
+| Frontend | Netlify |
+| Backend | Render |
+| Database | SQLite |
+| AI Model | TensorFlow |
+| Version Control | GitHub |
 ---
+## Project Workflow
 
-## How to Run the Project
-
-### 1. Clone Repository
-
-```
-git clone https://github.com/yourusername/oncoscan-ai.git
-cd oncoscan-ai
-```
-
-### 2. Create Virtual Environment
-
-```
-python -m venv venv
-venv\Scripts\activate
-```
-
-### 3. Install Requirements
-
-```
-pip install -r requirements.txt
-```
-
-### 4. Run Server
-
-```
-uvicorn backend.main:app --reload
-```
-
-### 5. Open in Browser
-
-```
-http://127.0.0.1:8000/login
-```
-
----
-
-## Default Admin Login
-
-```
-Username: admin
-Password: admin123
-```
-
----
-
-## System Workflow
-
-```
-User Registration / Login
-            |
-            v
+User Login
+↓
 Upload MRI Image
-            |
-            v
-AI Model Prediction
-            |
-            v
-Save Result to Database
-            |
-            v
+↓
+Image Preprocessing
+↓
+CNN Model Prediction
+↓
+Generate Heatmap
+↓
+Save Data to Database
+↓
 Generate PDF Report
-            |
-            v
-User History / Admin Dashboard
-```
+↓
+Show Result to User
+↓
+Admin Dashboard Analytics
 
 ---
+## Technologies Used
 
+### Machine Learning
+- TensorFlow
+- Keras
+- CNN
+- Grad-CAM
+- OpenCV
+- NumPy
+
+### Backend
+- FastAPI
+- Python
+- SQLite
+- ReportLab
+- Uvicorn
+
+### Frontend
+- HTML
+- CSS
+- JavaScript
+- Chart.js
+
+### Deployment
+- Netlify
+- Render
+- GitHub
+---
 ## Future Improvements
-
-- Password Hashing
-- Email Verification
-- Multiple Image Prediction
-- Export CSV Reports
-- Model Accuracy Dashboard
-- Cloud Deployment
-- Docker Support
-- API Authentication
-- Role-Based Access Security
-
+- Password hashing
+- Email notification system
+- Multiple image prediction
+- Cloud image storage
+- Model accuracy dashboard
+- Docker deployment
+- JWT authentication
+- Role-based access control
+- Mobile responsive UI
 ---
-
 ## Author
 
-Shahriar Alom Masud
-IoT & Robotics Engineering
-Web Application Developer | AI | IoT | Robotics
+Shahriar Alom Masud  
+B.Sc. Engg. in IoT & Robotics Engineering  
+University of Frontier Technology, Bangladesh  
+Email: shahriar0002@std.uftb.ac.bd  
+LinkedIn: https://www.linkedin.com/in/shahriar-alom-masud
 
 ---
-
 ## License
 
-This project is developed for educational and research purposes.
->>>>>>> ab0992496abc4a5c90263659ff317c90d4560f18
+This project is licensed under the **MIT License**.
+
+---
+If you like this project, give it a star on GitHub!
