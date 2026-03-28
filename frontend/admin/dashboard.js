@@ -156,7 +156,7 @@ async function deleteRecord(id) {
     if (!confirm("Are you sure you want to delete this record?")) return;
 
     try {
-        const res = await fetch(`/delete/${id}`, {
+        const res = await fetch(API_BASE_URL + `/delete/${id}`, {
             method: "DELETE"
         });
 
