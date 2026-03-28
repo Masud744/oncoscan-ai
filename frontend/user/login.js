@@ -24,10 +24,11 @@ async function login() {
             localStorage.setItem("user_id", data.user_id);
             localStorage.setItem("role", data.role);
 
-            if (data.role === "admin") {
-                window.location.href = "/admin";
-            } else {
-                window.location.href = "/";
+           if (data.role === "admin") {
+    window.location.href = "/admin/dashboard.html";
+} else {
+    window.location.href = "/user/index.html";
+}
             }
         } else {
             alert("Invalid credentials. Please try again.");
