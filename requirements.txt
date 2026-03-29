@@ -5,5 +5,5 @@ pillow
 python-multipart
 reportlab
 opencv-python-headless
-tensorflow==2.12.0
-keras==2.12.0
+tensorflow==2.13.0
+keras==2.13.1

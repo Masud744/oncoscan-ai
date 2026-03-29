@@ -33,7 +33,7 @@ os.makedirs(os.path.join(STATIC_DIR, "heatmaps"), exist_ok=True)
 
 # Load model once
 print("Loading AI model...")
-model = tf.keras.models.load_model(MODEL_PATH)
+model = tf.keras.models.load_model(MODEL_PATH, compile=False)
 print("Model loaded successfully!")
 
 def get_db():
