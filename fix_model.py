@@ -1,9 +1,13 @@
 import tensorflow as tf
+from tensorflow import keras
 
-# Load model with tf.keras ONLY
-model = tf.keras.models.load_model("models/brain_tumor_model.h5", compile=False)
+print("Loading original model...")
+model = keras.models.load_model("models/brain_tumor_model.h5", compile=False)
 
-# Save again using tf.keras
+print("Saving fixed H5 model...")
 model.save("models/model_fixed.h5")
 
-print("Model converted successfully")
+print("Saving Keras format model...")
+model.save("models/model_fixed.keras")
+
+print("Done! Model converted successfully.")
