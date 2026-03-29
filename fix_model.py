@@ -1,9 +1,9 @@
 import tensorflow as tf
 
-# Load old model
+# old model load
 model = tf.keras.models.load_model("models/brain_tumor_model.h5", compile=False)
 
-# Export SavedModel format (folder)
-model.export("models/model_fixed")
+# save in new keras format
+model.save("models/model_fixed.keras")
 
-print("Model exported in SavedModel format")
+print("Model converted and saved as model_fixed.keras")

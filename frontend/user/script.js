@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // -------- LOGIN CHECK --------
     const user_id = localStorage.getItem("user_id");
     if (!user_id) {
-        window.location.href = "/login";
+       window.location.href = "/user/login.html";
         return;
     }
 
@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
             localStorage.setItem("lastPatientName", patientName);
 
             // Redirect to result page
-            window.location.href = "/result-page";
+           window.location.href = "/user/result.html";
 
         } catch (error) {
             console.error("Prediction error:", error);

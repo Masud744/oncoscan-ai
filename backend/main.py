@@ -23,7 +23,7 @@ ROOT_DIR = os.path.abspath(os.path.join(BASE_DIR, ".."))
 DATABASE = os.path.join(ROOT_DIR, "database.db")
 STATIC_DIR = os.path.join(ROOT_DIR, "static")
 FRONTEND_DIR = os.path.join(ROOT_DIR, "frontend")
-MODEL_PATH = os.path.join(ROOT_DIR, "models", "model_fixed.h5")
+MODEL_PATH = os.path.join(ROOT_DIR, "models", "model_fixed.keras")
 
 # Create folders
 os.makedirs(STATIC_DIR, exist_ok=True)
@@ -33,7 +33,7 @@ os.makedirs(os.path.join(STATIC_DIR, "heatmaps"), exist_ok=True)
 
 # Load model once
 print("Loading AI model...")
-model = tf.keras.models.load_model(MODEL_PATH, compile=False)
+model = tf.keras.models.load_model(MODEL_PATH)
 print("Model loaded successfully!")
 
 def get_db():

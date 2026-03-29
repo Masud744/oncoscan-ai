@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", loadHistory);
 async function loadHistory() {
     const user_id = localStorage.getItem("user_id");
     if (!user_id) {
-        window.location.href = "/login";
+        window.location.href = "/user/login.html";
         return;
     }
 

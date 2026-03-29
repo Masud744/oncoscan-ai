@@ -20,18 +20,19 @@ async function login() {
 
         const data = await res.json();
 
-        if (data.status === "success") {
-            localStorage.setItem("user_id", data.user_id);
-            localStorage.setItem("role", data.role);
+     if (data.status === "success") {
+    localStorage.setItem("user_id", data.user_id);
+    localStorage.setItem("role", data.role);
 
-            if (data.role === "admin") {
-                window.location.href = "/admin";
-            } else {
-                window.location.href = "/";
-            }
-        } else {
+    if (data.role === "admin") {
+        window.location.href = "/admin/dashboard.html";
+    } else {
+        window.location.href = "/user/index.html";
+    }
+} else {
             alert("Invalid credentials. Please try again.");
         }
+
     } catch (error) {
         console.error("Login error:", error);
         alert("Connection error. Is the backend running?");
