@@ -32,9 +32,15 @@ os.makedirs(os.path.join(STATIC_DIR, "reports"), exist_ok=True)
 os.makedirs(os.path.join(STATIC_DIR, "heatmaps"), exist_ok=True)
 
 # Load model once
-print("Loading AI model...")
-model = tf.keras.models.load_model(MODEL_PATH, compile=False)
-print("Model loaded successfully!")
+model = None
+
+def get_model():
+    global model
+    if model is None:
+        print("Loading AI model...")
+        model = tf.keras.models.load_model(MODEL_PATH, compile=False)
+        print("Model loaded successfully!")
+    return model
 
 def get_db():
     conn = sqlite3.connect(DATABASE)
@@ -154,6 +160,7 @@ async def predict(
         img = img / 255.0
         img = np.expand_dims(img, axis=0)
 
+        model = get_model()
         prediction_prob = float(model.predict(img)[0][0])
         label = "Tumor" if prediction_prob > 0.5 else "No Tumor"
 
