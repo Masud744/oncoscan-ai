@@ -122,6 +122,8 @@ oncoscan-ai/
 
 ## Application Screenshots
 
+## Application Screenshots
+
 ### Login Page
 
 <p align="center">
@@ -155,13 +157,13 @@ oncoscan-ai/
 ### Admin Dashboard
 
 <p align="center">
-  <img src="Images/Admin_dashboard.png" width="700"/>
+  <img src="Images/admin_dashboard.png" width="700"/>
 </p>
 
 ### Admin Analytical Statistics
 
 <p align="center">
-  <img src="Images/Admin_analytics.png" width="700"/>
+  <img src="Images/Admin_analytical_statistics.png" width="700"/>
 </p>
 
 ---
