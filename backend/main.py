@@ -1,6 +1,5 @@
 import os
 import numpy as np
-import tensorflow as tf
 import cv2
 import shutil
 import uuid
@@ -14,6 +13,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 
+import onnxruntime as ort
+
 app = FastAPI()
 
 # Base directory setup
@@ -23,7 +24,7 @@ ROOT_DIR = os.path.abspath(os.path.join(BASE_DIR, ".."))
 DATABASE = os.path.join(ROOT_DIR, "database.db")
 STATIC_DIR = os.path.join(ROOT_DIR, "static")
 FRONTEND_DIR = os.path.join(ROOT_DIR, "frontend")
-MODEL_PATH = os.path.join(ROOT_DIR, "models", "model_fixed.h5")
+MODEL_PATH = os.path.join(ROOT_DIR, "models", "model.onnx")
 
 # Create folders
 os.makedirs(STATIC_DIR, exist_ok=True)
@@ -31,16 +32,18 @@ os.makedirs(os.path.join(STATIC_DIR, "images"), exist_ok=True)
 os.makedirs(os.path.join(STATIC_DIR, "reports"), exist_ok=True)
 os.makedirs(os.path.join(STATIC_DIR, "heatmaps"), exist_ok=True)
 
-# Load model once
-model = None
+# Load ONNX model once
+onnx_session = None
+input_name = None
 
 def get_model():
-    global model
-    if model is None:
-        print("Loading AI model...")
-        model = tf.keras.models.load_model(MODEL_PATH, compile=False)
+    global onnx_session, input_name
+    if onnx_session is None:
+        print("Loading ONNX AI model...")
+        onnx_session = ort.InferenceSession(MODEL_PATH)
+        input_name = onnx_session.get_inputs()[0].name
         print("Model loaded successfully!")
-    return model
+    return onnx_session, input_name
 
 def get_db():
     conn = sqlite3.connect(DATABASE)
@@ -132,8 +135,8 @@ def generate_pdf(patient_name, patient_id, prediction, confidence, image_path):
     c.drawString(50, 620, f"Date : {now.strftime('%Y-%m-%d %H:%M:%S')}")
 
     c.drawImage(image_path, 150, 350, width=300, height=250)
-
     c.save()
+
     return f"/static/reports/{pdf_filename}"
 
 # PREDICT
@@ -158,10 +161,12 @@ async def predict(
 
         img = cv2.resize(img, (224, 224))
         img = img / 255.0
-        img = np.expand_dims(img, axis=0)
+        img = np.expand_dims(img, axis=0).astype(np.float32)
 
-        model = get_model()
-        prediction_prob = float(model.predict(img)[0][0])
+        session, input_name = get_model()
+        outputs = session.run(None, {input_name: img})
+        prediction_prob = float(outputs[0][0][0])
+
         label = "Tumor" if prediction_prob > 0.5 else "No Tumor"
 
         cursor.execute("""

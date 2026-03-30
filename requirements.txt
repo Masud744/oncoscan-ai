@@ -1,9 +1,10 @@
 fastapi
 uvicorn
 numpy
-pillow
+opencv-python-headless
 python-multipart
 reportlab
-opencv-python-headless
-tensorflow==2.13.0
-h5py
+pillow
+scikit-learn
+onnxruntime
+onnx

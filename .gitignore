@@ -1,14 +1,26 @@
+# Virtual environments
 venv/
+onnx_env/
+convert_env/
+
+# Python
 __pycache__/
 *.pyc
+
+# Dataset & notebooks
 dataset/
 notebooks/
 results/
 tests/
 gradcam/
-*.jpg
-*.png
-*.jpeg
+
+# Uploaded images
+static/images/
+static/heatmaps/
+
+# Logs
 *.log
+
+# Environment
 .env
 .DS_Store
